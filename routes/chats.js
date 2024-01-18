@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import routeCars from '../controllers/chats-controller.js';
-const { getAllChats, addCar, deleteById, updateFavoriteById } = routeCars;
+const { getAllChats, addMessage, deleteById, updateFavoriteById } = routeCars;
 const router = Router();
 
 router.get('/', getAllChats);
-router.post('/add', addCar);
+router.post('/add', addMessage);
 router.delete('/:contactId', deleteById);
 router.put('/:contactId', updateFavoriteById);
 export default router;

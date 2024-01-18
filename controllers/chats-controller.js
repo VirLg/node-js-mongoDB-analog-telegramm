@@ -4,7 +4,8 @@ const getAllChats = async (req, res) => {
   const result = await ChatModel.find();
   return res.json(result);
 };
-const addCar = async (req, res) => {
+const addMessage = async (req, res) => {
+  console.log('req.body', req.body);
   const result = await ChatModel.create(req.body);
   return res.json(result);
 };
@@ -37,4 +38,4 @@ const updateFavoriteById = async (req, res, next) => {
   }
 };
 
-export default { getAllChats, addCar, deleteById, updateFavoriteById };
+export default { getAllChats, addMessage, deleteById, updateFavoriteById };
