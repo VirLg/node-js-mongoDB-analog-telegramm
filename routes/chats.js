@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import routeCars from '../controllers/cars-controller.js';
-const { getAllCars, addCar, deleteById, updateFavoriteById } = routeCars;
+import routeCars from '../controllers/chats-controller.js';
+const { getAllChats, addCar, deleteById, updateFavoriteById } = routeCars;
 const router = Router();
 
-router.get('/catalog', getAllCars);
+router.get('/', getAllChats);
 router.post('/add', addCar);
 router.delete('/:contactId', deleteById);
 router.put('/:contactId', updateFavoriteById);

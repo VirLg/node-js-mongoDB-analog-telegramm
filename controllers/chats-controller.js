@@ -1,17 +1,17 @@
-import CarModel from '../models/CarModelMongoose.js';
+import ChatModel from '../models/ChatModelMongoose.js';
 
-const getAllCars = async (req, res) => {
-  const result = await CarModel.find();
+const getAllChats = async (req, res) => {
+  const result = await ChatModel.find();
   return res.json(result);
 };
 const addCar = async (req, res) => {
-  const result = await CarModel.create(req.body);
+  const result = await ChatModel.create(req.body);
   return res.json(result);
 };
 const deleteById = async (req, res, next) => {
   const { contactId } = req.params;
   try {
-    const result = await CarModel.findByIdAndDelete(contactId);
+    const result = await ChatModel.findByIdAndDelete(contactId);
     if (!result) {
       throw HttpError(404, 'Not found');
     }
@@ -24,7 +24,7 @@ const deleteById = async (req, res, next) => {
 const updateFavoriteById = async (req, res, next) => {
   const { contactId } = req.params;
   try {
-    const result = await CarModel.findByIdAndUpdate(contactId, req.body, {
+    const result = await ChatModel.findByIdAndUpdate(contactId, req.body, {
       favorite: req.body,
     });
     if (!result) {
@@ -37,4 +37,4 @@ const updateFavoriteById = async (req, res, next) => {
   }
 };
 
-export default { getAllCars, addCar, deleteById, updateFavoriteById };
+export default { getAllChats, addCar, deleteById, updateFavoriteById };
