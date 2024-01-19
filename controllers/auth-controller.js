@@ -4,5 +4,9 @@ const getCurrent = async (req, res) => {
   const result = await AuthModel.find();
   return res.json(result);
 };
+const addUser = async (req, res) => {
+  const result = await AuthModel.find();
+  return res.json(result);
+};
 
-export default { getCurrent };
+export default { getCurrent, addUser };
