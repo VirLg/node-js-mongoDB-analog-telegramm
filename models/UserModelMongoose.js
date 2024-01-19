@@ -8,6 +8,8 @@ export const addUserJoiShema = Joi.object({
   email: Joi.string().pattern(validateEmail).required(),
   password: Joi.string().required(),
   name: Joi.string().required(),
+  avatar: Joi.string().required(),
+  owner: Joi.string().required(),
 });
 
 const userSchema = new Schema({
@@ -22,6 +24,14 @@ const userSchema = new Schema({
     required: true,
   },
   name: {
+    type: String,
+    required: true,
+  },
+  avatar: {
+    type: String,
+    required: true,
+  },
+  owner: {
     type: String,
     required: true,
   },
