@@ -2,13 +2,22 @@ import HttpError from '../middlevars/HttpError.js';
 import ChatModel from '../models/ChatModelMongoose.js';
 
 const getAllChats = async (req, res) => {
-  const result = await ChatModel.find();
-  return res.json(result);
+  try {
+    const result = await ChatModel.find();
+    return res.json(result);
+  } catch (error) {
+    console.log('result', error.status);
+    next(error);
+  }
 };
 const addMessage = async (req, res) => {
-  console.log('req.body', req.body);
-  const result = await ChatModel.create(req.body);
-  return res.json(result);
+  try {
+    const result = await ChatModel.create(req.body);
+    return res.json(result);
+  } catch (error) {
+    console.log('result', error.status);
+    next(error);
+  }
 };
 const deleteById = async (req, res, next) => {
   const { messageId } = req.params;
@@ -24,12 +33,36 @@ const deleteById = async (req, res, next) => {
   }
 };
 const updateMessageById = async (req, res, next) => {
-  const { messageId } = req.body;
-  const result = await ChatModel.findByIdAndUpdate(messageId, req.body);
-  if (!result) {
-    throw HttpError(404, `Message whith {id} not found`);
+  const { messageId } = req.params;
+  try {
+    const result = await ChatModel.findByIdAndUpdate(messageId, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!result) {
+      throw HttpError(404, `Message whith {messageId} not found`);
+    }
+    return res.json(result);
+  } catch (error) {
+    console.log('result', error.status);
+    next(error);
   }
-  return res.json(result);
+};
+const updateOnlyMessageById = async (req, res, next) => {
+  const { messageId } = req.params;
+  try {
+    const result = await ChatModel.findByIdAndUpdate(messageId, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!result) {
+      throw HttpError(404, `Message whith {messageId} not found`);
+    }
+    return res.json(result);
+  } catch (error) {
+    console.log('result', error.status);
+    next(error);
+  }
 };
 
 export default { getAllChats, addMessage, deleteById, updateMessageById };

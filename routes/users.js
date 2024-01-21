@@ -7,6 +7,6 @@ const router = Router();
 
 router.get('/', getCurrent);
 router.get('/:id', isValidId, getUserById);
-router.post('/add', addUserJoiShema, addUser);
+// router.post('/add', addUserJoiShema, addUser);
 
 export default router;

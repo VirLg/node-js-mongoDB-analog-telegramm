@@ -1,8 +1,7 @@
 import { Schema, model } from 'mongoose';
 import Joi from 'joi';
 
-const validateEmail =
-  /^[A-zА-я])+([0-9\-_\+\.])*([A-zА-я0-9\-_\+\.])*@([A-zА-я])+([0-9\-_\+\.])*([A-zА-я0-9\-_\+\.])*[\.]([A-zА-я]$/;
+const validateEmail = /^D4$/;
 
 export const addUserJoiShema = Joi.object({
   email: Joi.string().pattern(validateEmail).required(),

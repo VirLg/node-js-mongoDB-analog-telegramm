@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import Joi from 'joi';
-import { handleSaveError } from './hooks/hooks.js';
+import { handleSaveError, runVAlidatorsAtUpdate } from './hooks/hooks.js';
 
 export const addMessageJoiSchema = Joi.object({
   message: Joi.string().required(),
@@ -19,6 +19,9 @@ const chatSchema = new Schema(
 );
 // post save hook
 chatSchema.post('save', handleSaveError);
+// pre hook
+chatSchema.pre('findOneAndUpdate', runVAlidatorsAtUpdate);
+chatSchema.post('findOneAndUpdate', handleSaveError);
 const ChatModel = model('chat', chatSchema);
 // chat - назва кластеру в однині!
 
